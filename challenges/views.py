@@ -1,5 +1,20 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 
-def index(request):
-    return HttpResponse("This is django course")
+# Create your views here.
+
+days = {
+    'saturday': 'this is satureday in disctionary',
+    'sunday': 'this is sunday in disctionary',
+    'monday': 'this is monday in disctionary',
+    'tuesday': 'this is tuesday in disctionary',
+    'wednesday': 'this is wednesday in disctionary',
+    'friday': 'this is friday in disctionary',
+}
+
+def dynamic_days(reqeust, day):
+    day_data = days.get(day)
+    if day_data is not None:
+        return HttpResponse(f'day is : {day} and data is : {day_data}')
+    
+    return HttpResponseNotFound('day does not exists')
